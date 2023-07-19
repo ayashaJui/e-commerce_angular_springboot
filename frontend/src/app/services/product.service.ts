@@ -4,18 +4,20 @@ import { Product } from '../common/product';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProductCategory } from '../common/product-category';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private baseUrl = 'http://localhost:8080/api/products';
+  private baseUrl = environment.luv2shopApiUrl + '/products';
 
-  private categoryUrl = 'http://localhost:8080/api/product-category';
+  private categoryUrl = environment.luv2shopApiUrl + '/product-category';
 
   constructor(private httpClient: HttpClient) {}
 
   getProductList(theCategoryId: number): Observable<Product[]> {
+    
     // need to build URL based on category id
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
     return this.httpClient
@@ -36,6 +38,7 @@ export class ProductService {
   }
 
   getProductCategories(): Observable<ProductCategory[]> {
+    console.log(`getting from: -> ${this.baseUrl}`)
     // console.log(this.categoryUrl, this.httpClient.get<GetResponseProductCategory>(this.categoryUrl));
     return this.httpClient
       .get<GetResponseProductCategory>(this.categoryUrl)

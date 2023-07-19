@@ -1,9 +1,6 @@
 package com.example.springbootecommerce.config;
 
-import com.example.springbootecommerce.entity.Country;
-import com.example.springbootecommerce.entity.Product;
-import com.example.springbootecommerce.entity.ProductCategory;
-import com.example.springbootecommerce.entity.State;
+import com.example.springbootecommerce.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.metamodel.EntityType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +40,8 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(Country.class, config, theUnsupportedActions);
 
         disableHttpMethods(State.class, config, theUnsupportedActions);
+
+        disableHttpMethods(Order.class, config, theUnsupportedActions);
 
 
         // call internal helper method
